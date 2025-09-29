@@ -6,6 +6,9 @@ on:
       subdir:
         description: 'Subdirectory under .research/latex/ (e.g., iclr2025)'
         required: true
+      selected_branches:
+          description: 'Branches to fetch images from (comma-separated)'
+          required: true
 
 permissions:
   contents: write
@@ -34,15 +37,26 @@ jobs:
             texlive-latex-extra \
             texlive-science
 
-      - name: Copy latest images
+      - name: Fetch images from selected branches
         run: |
-          latest=$(ls .research | grep '^iteration[0-9]\+$' | sed 's/iteration//' | sort -n | tail -n1)
-          src_dir=".research/iteration${latest}/images"
           dest_dir="${LATEX_DIR}/images"
-          echo "Copying from $src_dir to $dest_dir"
-
           mkdir -p "$dest_dir"
-          cp -r "$src_dir"/* "$dest_dir" || echo "No images to copy"
+          IFS=',' read -ra branches <<< "${{ github.event.inputs.selected_branches }}"
+
+          for branch in "${branches[@]}"; do
+            echo "Processing branch: $branch"
+            git fetch origin $branch
+            git checkout $branch -- .research/
+
+            latest=$(ls .research | grep '^iteration[0-9]\+$' | sed 's/iteration//' | sort -n | tail -n1)
+
+            src_dir=".research/iteration${latest}/images"
+            echo "Copying from $src_dir to $dest_dir"
+            cp -r "$src_dir"/* "$dest_dir" || echo "No images to copy"
+
+            echo "Cleaning up .research directory..."
+            rm -rf .research
+          done
 
       - name: Compile paper.tex and capture errors
         run: |
