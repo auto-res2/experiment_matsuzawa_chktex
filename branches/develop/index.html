@@ -91,41 +91,37 @@
 
 <section>
   <h2>Method</h2>
-  <p>Our proposed architecture consists of the following key components:</p>
+  <p>Our proposed architecture consists of three main components:</p>
   <ul>
-    <li><strong>Visual Encoder:</strong> A ResNet-50 network that extracts high-level visual features.</li>
-    <li><strong>Textual Encoder:</strong> A BERT-base model that encodes contextualized word representations.</li>
-    <li><strong>Cross-Modal Fusion Module:</strong> Implemented with multi-head attention to dynamically weight features from different modalities based on input context.</li>
+    <li><strong>Visual Encoder:</strong> A ResNet-50 backbone for extracting visual features.</li>
+    <li><strong>Textual Encoder:</strong> A BERT-base model for processing textual inputs.</li>
+    <li><strong>Cross-Modal Fusion Module:</strong> A multi-head attention mechanism that dynamically weights features from different modalities based on context.</li>
   </ul>
-  <p>We employ a joint training strategy that optimizes both modality-specific and cross-modal objectives simultaneously.</p>
+  <p>The fusion module allows for dynamic weighting of features from different modalities based on the input context. We employ a joint training strategy that optimizes both modality-specific and cross-modal objectives simultaneously.</p>
 </section>
 
 <section>
   <h2>Experimental Setup</h2>
-  <p>We evaluate our approach on three benchmark datasets: VQA 2.0, MSCOCO Caption, and Flickr30K.</p>
-  <ul>
-    <li><strong>VQA 2.0:</strong> Achieves 72.4 % accuracy, surpassing the previous best by 3.2 %.</li>
-    <li><strong>MSCOCO Caption:</strong> Obtains a BLEU-4 score of 38.6, a 2.1 % improvement over the baseline.</li>
-    <li><strong>Flickr30K:</strong> Shows consistent gains across all standard evaluation metrics.</li>
-  </ul>
-  <p>Training was performed with the Adam optimizer using a learning rate of 1 × 10<sup>-4</sup> and a batch size of 32.</p>
+  <p>We evaluate our approach on three benchmark datasets: VQA 2.0, MSCOCO Caption, and Flickr30K. Our method achieves 72.4% accuracy on VQA 2.0, surpassing the previous best result by 3.2%. On MSCOCO Caption, we obtain a BLEU-4 score of 38.6, representing a 2.1% improvement over the baseline. Training was performed using the Adam optimizer with a learning rate of 1e-4 and a batch size of 32.</p>
 </section>
 
 <section>
   <h2>Results</h2>
-  <figure style="width:70%">
-    <img src="images/training_convergence.png" alt="Training convergence">
-    <figcaption>Figure 1: Convergence behavior of the proposed model compared to baseline approaches.</figcaption>
+  <p>Figure 1 shows the convergence behavior of our model during training, where the proposed method converges faster and achieves lower final loss compared to baseline approaches. Figure 2 illustrates the attention weights learned by the cross-modal fusion module, demonstrating that the model learns to focus on relevant visual regions when processing textual queries. Performance comparisons across different datasets are presented in Figure 3, showing consistent improvements over existing methods.</p>
+
+  <figure>
+    <img src="images/training_convergence.png" style="width:70%">
+    <figcaption>Figure 1: Convergence behavior of our model during training.</figcaption>
   </figure>
 
-  <figure style="width:70%">
-    <img src="images/attention_visualization.png" alt="Attention visualization">
-    <figcaption>Figure 2: Attention weights learned by the cross-modal fusion module, highlighting relevant visual regions for textual queries.</figcaption>
+  <figure>
+    <img src="images/attention_visualization.png" style="width:70%">
+    <figcaption>Figure 2: Attention weights learned by the cross-modal fusion module.</figcaption>
   </figure>
 
-  <figure style="width:70%">
-    <img src="images/performance_comparison.png" alt="Performance comparison">
-    <figcaption>Figure 3: Performance comparisons across different datasets, showing consistent improvements over existing methods.</figcaption>
+  <figure>
+    <img src="images/performance_comparison.png" style="width:70%">
+    <figcaption>Figure 3: Performance comparison across different datasets.</figcaption>
   </figure>
 </section>
 
