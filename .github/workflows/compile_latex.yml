@@ -46,7 +46,7 @@ jobs:
           for branch in "${branches[@]}"; do
             echo "Processing branch: $branch"
             git fetch origin $branch
-            git checkout $branch -- .research/
+            git checkout origin/$branch -- .research/
 
             latest=$(ls .research | grep '^iteration[0-9]\+$' | sed 's/iteration//' | sort -n | tail -n1)
 
