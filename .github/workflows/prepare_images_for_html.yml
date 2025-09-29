@@ -32,24 +32,29 @@ jobs:
 
           for branch in "${branches[@]}"; do
             echo "Processing branch: $branch"
+
+            tmp_dir="$(mktemp -d)"
             git fetch origin $branch
-            git checkout origin/$branch -- .research/
+            git --work-tree="$tmp_dir" checkout origin/$branch -- .research/ || true
 
-            latest=$(ls .research | grep '^iteration[0-9]\+$' | sed 's/iteration//' | sort -n | tail -n1)
-            img_dir=".research/iteration${latest}/images"
+            latest=$(ls "$tmp_dir/.research" | grep '^iteration[0-9]\+$' | sed 's/iteration//' | sort -n | tail -n1)
+            if [ -n "$latest" ]; then
+              img_dir=".research/iteration${latest}/images"
 
-            if [ -d "$img_dir" ]; then
-              for pdf in "$img_dir"/*.pdf; do
-                [ -e "$pdf" ] || continue
-                name=$(basename "$pdf" .pdf)
-                pdftoppm "$pdf" "output_images/${branch}_${name}" -png
-              done
+              if [ -d "$img_dir" ]; then
+                for pdf in "$img_dir"/*.pdf; do
+                  [ -e "$pdf" ] || continue
+                  name=$(basename "$pdf" .pdf)
+                  pdftoppm "$pdf" "output_images/${name}" -png
+                done
+              else
+                echo "No images found in $branch"
+              fi
             else
-              echo "No images found in $branch"
+              echo "No iteration directories in $branch"
             fi
 
-            echo "Cleaning up .research directory..."
-            rm -rf .research
+            rm -rf "$tmp_dir"
           done
 
           for png in output_images/*-1.png; do
