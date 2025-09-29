@@ -91,7 +91,13 @@
 
 <section>
   <h2>Method</h2>
-  <p>Our proposed architecture consists of three main components: (1) a visual encoder based on ResNet-50, (2) a textual encoder using BERT-base, and (3) a cross-modal fusion module implemented using multi-head attention. The fusion module allows for dynamic weighting of features from different modalities based on the input context. We employ a joint training strategy that optimizes both modality-specific and cross-modal objectives simultaneously.</p>
+  <p>Our proposed architecture consists of three main components:</p>
+  <ul>
+    <li><strong>Visual encoder:</strong> Based on ResNet-50.</li>
+    <li><strong>Textual encoder:</strong> Uses BERT-base.</li>
+    <li><strong>Cross-modal fusion module:</strong> Implemented using multi-head attention.</li>
+  </ul>
+  <p>The fusion module allows for dynamic weighting of features from different modalities based on the input context. We employ a joint training strategy that optimizes both modality-specific and cross-modal objectives simultaneously.</p>
 </section>
 
 <section>
@@ -101,21 +107,22 @@
 
 <section>
   <h2>Results</h2>
-  <p>Figure&nbsp;1 shows the convergence behavior of our model during training. The proposed method converges faster and achieves lower final loss compared to baseline approaches. Figure&nbsp;2 illustrates the attention weights learned by the cross-modal fusion module, demonstrating that the model learns to focus on relevant visual regions when processing textual queries. Performance comparisons across different datasets are presented in Figure&nbsp;3, showing consistent improvements over existing methods.</p>
-
-  <figure style="width:70%">
-    <img src="images/training_convergence.png" alt="Training convergence curve">
-    <figcaption>Figure 1: Convergence behavior of the proposed model during training.</figcaption>
+  <p>Figure&nbsp;1 shows the convergence behavior of our model during training. The proposed method converges faster and achieves lower final loss compared to baseline approaches.</p>
+  <figure>
+    <img src="images/training_convergence.png" style="width:70%">
+    <figcaption>Figure&nbsp;1: Convergence behavior of the proposed model during training.</figcaption>
   </figure>
 
-  <figure style="width:70%">
-    <img src="images/attention_visualization.png" alt="Attention visualization">
-    <figcaption>Figure 2: Attention weights learned by the cross-modal fusion module.</figcaption>
+  <p>Figure&nbsp;2 illustrates the attention weights learned by the cross-modal fusion module, demonstrating that the model learns to focus on relevant visual regions when processing textual queries.</p>
+  <figure>
+    <img src="images/attention_visualization.png" style="width:70%">
+    <figcaption>Figure&nbsp;2: Attention weights visualized for sample queries.</figcaption>
   </figure>
 
-  <figure style="width:70%">
-    <img src="images/performance_comparison.png" alt="Performance comparison across datasets">
-    <figcaption>Figure 3: Performance comparison between the proposed method and baseline approaches across benchmark datasets.</figcaption>
+  <p>Performance comparisons across different datasets are presented in Figure&nbsp;3, showing consistent improvements over existing methods.</p>
+  <figure>
+    <img src="images/performance_comparison.png" style="width:70%">
+    <figcaption>Figure&nbsp;3: Performance comparison with baseline approaches across benchmark datasets.</figcaption>
   </figure>
 </section>
 
