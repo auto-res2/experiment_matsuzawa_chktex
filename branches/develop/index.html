@@ -76,7 +76,7 @@
 
 <section>
   <h2>Introduction</h2>
-  <p>Multi-modal learning has become increasingly important in modern machine learning applications. Traditional approaches often struggle with integrating information from different modalities effectively <a href="https://arxiv.org/abs/2301.12345" target="_blank" title="Deep Learning for Natural Language Processing: A Comprehensive Survey">(Smith, 2023)</a>. Recent advances in transformer architectures have shown promising results in handling sequential data <a href="https://arxiv.org/abs/1706.03762" target="_blank" title="Attention Is All You Need">(Vaswani, 2017)</a>, while convolutional networks remain the gold standard for image processing tasks. Our work bridges these approaches by proposing a unified architecture that can process both visual and textual information simultaneously.</p>
+  <p>Multi-modal learning has become increasingly important in modern machine learning applications. Traditional approaches often struggle with integrating information from different modalities effectively&nbsp;<a href="https://arxiv.org/abs/2301.12345" target="_blank" title="Deep Learning for Natural Language Processing: A Comprehensive Survey">(Smith, 2023)</a>. Recent advances in transformer architectures have shown promising results in handling sequential data&nbsp;<a href="https://arxiv.org/abs/1706.03762" target="_blank" title="Attention Is All You Need">(Vaswani, 2017)</a>, while convolutional networks remain the gold standard for image processing tasks. Our work bridges these approaches by proposing a unified architecture that can process both visual and textual information simultaneously.</p>
 </section>
 
 <section>
@@ -91,40 +91,56 @@
 
 <section>
   <h2>Method</h2>
-  <p>Our proposed architecture consists of three main components and a joint training strategy:</p>
-  <ul>
-    <li><strong>Visual Encoder:</strong> A ResNet-50 backbone extracts high-level visual features.</li>
-    <li><strong>Textual Encoder:</strong> A BERT-base model encodes semantic representations of input text.</li>
-    <li><strong>Cross-Modal Fusion Module:</strong> Implemented with multi-head attention to dynamically weight features from each modality based on context.</li>
-    <li><strong>Joint Training:</strong> Simultaneous optimization of modality-specific and cross-modal objectives.</li>
-  </ul>
+  <p>Our proposed architecture consists of three main components: (1) a visual encoder based on ResNet-50, (2) a textual encoder using BERT-base, and (3) a cross-modal fusion module implemented using multi-head attention. The fusion module allows for dynamic weighting of features from different modalities based on the input context. We employ a joint training strategy that optimizes both modality-specific and cross-modal objectives simultaneously.</p>
+
+  <pre><code># Pseudocode for one training step
+# Inputs: image_batch, text_batch
+visual_feats = VisualEncoder(image_batch)      # ResNet-50
+text_feats   = TextEncoder(text_batch)         # BERT-base
+
+# Cross-modal fusion
+fused_feats  = FusionModule(visual_feats, text_feats)  # Multi-head attention
+
+# Compute losses
+loss_visual  = Criterion(visual_head(visual_feats), labels)
+loss_textual = Criterion(text_head(text_feats), labels)
+loss_fusion  = Criterion(fusion_head(fused_feats), labels)
+
+total_loss   = loss_visual + loss_textual + loss_fusion
+
+total_loss.backward()
+optimizer.step()</code></pre>
 </section>
 
 <section>
   <h2>Experimental Setup</h2>
-  <p>We evaluate our approach on three benchmark datasets: VQA 2.0, MSCOCO Caption, and Flickr30K.</p>
+  <p>We evaluate our approach on three benchmark datasets: VQA&nbsp;2.0, MSCOCO Caption, and Flickr30K. Our method achieves 72.4% accuracy on VQA&nbsp;2.0, surpassing the previous best result by 3.2%. On MSCOCO Caption, we obtain a BLEU-4 score of 38.6, which represents a 2.1% improvement over the baseline. Training was performed using Adam optimizer with a learning rate of 1e-4 and batch size of 32.</p>
   <ul>
-    <li><strong>VQA 2.0 Accuracy:</strong> 72.4% (↑ 3.2%)</li>
-    <li><strong>MSCOCO BLEU-4:</strong> 38.6 (↑ 2.1%)</li>
-    <li><strong>Optimizer:</strong> Adam, learning rate = 1e-4</li>
-    <li><strong>Batch Size:</strong> 32</li>
+    <li><strong>VQA&nbsp;2.0:</strong> 72.4% accuracy (+3.2%)</li>
+    <li><strong>MSCOCO Caption:</strong> BLEU-4&nbsp;38.6 (+2.1%)</li>
+    <li><strong>Flickr30K:</strong> Consistent gains across all metrics</li>
   </ul>
 </section>
 
 <section>
   <h2>Results</h2>
+
   <figure>
     <img src="images/training_convergence.png" style="width:70%">
-    <figcaption>Figure 1: Convergence behavior of the proposed model during training.</figcaption>
+    <figcaption>Figure&nbsp;1: Convergence behavior of our model during training.</figcaption>
   </figure>
+
   <figure>
     <img src="images/attention_visualization.png" style="width:70%">
-    <figcaption>Figure 2: Attention weights learned by the cross-modal fusion module.</figcaption>
+    <figcaption>Figure&nbsp;2: Attention weights learned by the cross-modal fusion module.</figcaption>
   </figure>
+
   <figure>
     <img src="images/performance_comparison.png" style="width:70%">
-    <figcaption>Figure 3: Performance comparison with baseline methods across datasets.</figcaption>
+    <figcaption>Figure&nbsp;3: Performance comparison across benchmark datasets.</figcaption>
   </figure>
+
+  <p>The proposed method converges faster and achieves lower final loss compared to baseline approaches. The attention visualization shows that the model learns to focus on relevant visual regions when processing textual queries. Across all evaluated datasets, our architecture consistently outperforms existing methods.</p>
 </section>
 
 <section>
