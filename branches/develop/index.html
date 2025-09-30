@@ -91,27 +91,39 @@
 
 <section>
   <h2>Method</h2>
-  <p>Our proposed architecture consists of three main components: (1) a visual encoder based on ResNet-50, (2) a textual encoder using BERT-base, and (3) a cross-modal fusion module implemented using multi-head attention. The fusion module allows for dynamic weighting of features from different modalities based on the input context. We employ a joint training strategy that optimizes both modality-specific and cross-modal objectives simultaneously.</p>
+  <p>Our proposed architecture consists of three main components and a joint training strategy:</p>
+  <ul>
+    <li><strong>Visual Encoder:</strong> A ResNet-50 backbone extracts high-level visual features.</li>
+    <li><strong>Textual Encoder:</strong> A BERT-base model encodes semantic representations of input text.</li>
+    <li><strong>Cross-Modal Fusion Module:</strong> Implemented with multi-head attention to dynamically weight features from each modality based on context.</li>
+    <li><strong>Joint Training:</strong> Simultaneous optimization of modality-specific and cross-modal objectives.</li>
+  </ul>
 </section>
 
 <section>
   <h2>Experimental Setup</h2>
-  <p>We evaluate our approach on three benchmark datasets: VQA&nbsp;2.0, MSCOCO Caption, and Flickr30K. Our method achieves 72.4&nbsp;% accuracy on VQA&nbsp;2.0, surpassing the previous best result by 3.2&nbsp;%. On MSCOCO Caption, we obtain a BLEU-4 score of 38.6, which represents a 2.1&nbsp;% improvement over the baseline. Training was performed using Adam optimizer with a learning rate of 1e-4 and batch size of 32.</p>
+  <p>We evaluate our approach on three benchmark datasets: VQA 2.0, MSCOCO Caption, and Flickr30K.</p>
+  <ul>
+    <li><strong>VQA 2.0 Accuracy:</strong> 72.4% (↑ 3.2%)</li>
+    <li><strong>MSCOCO BLEU-4:</strong> 38.6 (↑ 2.1%)</li>
+    <li><strong>Optimizer:</strong> Adam, learning rate = 1e-4</li>
+    <li><strong>Batch Size:</strong> 32</li>
+  </ul>
 </section>
 
 <section>
   <h2>Results</h2>
   <figure>
     <img src="images/training_convergence.png" style="width:70%">
-    <figcaption>Figure&nbsp;1: Convergence behavior of the proposed model during training.</figcaption>
+    <figcaption>Figure 1: Convergence behavior of the proposed model during training.</figcaption>
   </figure>
   <figure>
     <img src="images/attention_visualization.png" style="width:70%">
-    <figcaption>Figure&nbsp;2: Attention weights learned by the cross-modal fusion module.</figcaption>
+    <figcaption>Figure 2: Attention weights learned by the cross-modal fusion module.</figcaption>
   </figure>
   <figure>
     <img src="images/performance_comparison.png" style="width:70%">
-    <figcaption>Figure&nbsp;3: Performance comparisons across different datasets.</figcaption>
+    <figcaption>Figure 3: Performance comparison with baseline methods across datasets.</figcaption>
   </figure>
 </section>
 
